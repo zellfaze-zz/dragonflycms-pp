@@ -1,0 +1,81 @@
+Place the Modules and Language folders in the publicly accessible root of your dragonfly site.
+Install and activate the module via the modules administration section.
+
+
+IMPORTANT! If you are upgrading from Personality Pages:
+
+If you want to keep your old data intact, DON'T uninstall Personality Pages!
+Instead, disable the module, or delete /modules/Personality manually. 
+
+This will leave the database entries intact.
+
+Upon attempting to install Personal Pages, you may get a SQL error. This is because the tables 
+it is trying to create already exist. I've included a hacked copy of cpg_inst.php which
+will work around this issue. Use it to replace the copy in /modules/Personal
+
+In the future, if you want to uninstall and reinstall the module, you will need to switch
+the files back to recreate the initial database entries.
+
+-Andy
+
+
+********************************
+ENGLISH INSTALLATION INSTRUCTION
+********************************
+********************************************
+  PERSONALITY - MODULE FOR CPGNUKE 9.0.6.1
+********************************************
+
+  author:       gtown
+  date:         2006/10/14
+  version:      2
+  authemail:    admin@germeringer.de
+  authurl:      http://www.germeringer.de
+
+  This module is based on the blogs module of
+  DJMaze and Trevor from www.cpgnuke.com
+  Special thanks to dcollis!
+
+*********************************************
+
+
+NEW FEATURES:
+
+
+- Personal pages now show up directly in the users profile
+
+- therefore the ugly link is not needed anymore
+
+- Guestbook in user's profile because "greetings" directly show up there aswell
+
+- greetings can be posted directly over the user's profile
+
+
+
+NEW INSTALLATION:
+
+
+- Copy the contents of the folder "Personality_Module_V2" in your Dragonfly root.
+
+- Admin Men� => Module => install
+
+- Have Fun!
+
+
+
+UPDATE FROM VERSION 1:
+
+- Just write the new files over the old ones, there are NO CHANGES IN THE DATABASE, so nothing get's lost
+
+- The changes in userinfo.php are not needed anymore and can be deleted.
+  Goto /modules/Your_Account/userinfo.php and DELETE the following code lines: (at about line 150)
+
+if (is_active('Personality')) {
+                list($personality) = $db->sql_ufetchrow("SELECT COUNT(*) FROM ".$prefix."_personality WHERE aid='$username' AND private=0 LIMIT 1");
+                if ($personality > 0) {
+                get_lang('Personality');
+                        echo '<tr>
+                  <td colspan="2" align="center"><b><span class="gen"><a href="'.getlink('Personality&amp;mode=user&amp;nick='.$username).'">'._PTY_READ.'</a></span></b></td>
+                </tr>';
+                }
+        }

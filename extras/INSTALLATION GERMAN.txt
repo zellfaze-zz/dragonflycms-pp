@@ -1,0 +1,68 @@
+********************************
+DEUTSCHE INSTALLATIONSANLEITUNG
+GERMAN INSTALLATION INSTRUCTION
+********************************
+********************************************
+  PERSONALITY - MODULE FOR CPGNUKE 9.0.6.1
+********************************************
+
+  author:       gtown
+  date:         2006/10/14
+  version:      2
+  authemail:    admin@germeringer.de
+  authurl:      http://www.germeringer.de
+
+  This module is based on the blogs module of
+  DJMaze and Trevor from www.cpgnuke.com
+  Special thanks to dcollis!
+
+*********************************************
+
+NEUERUNGEN:
+
+
+- Persönliche Seiten werden direkt im Userprofil dargestellt
+
+- deshalb ist der unschöne Link nicht mehr notwendig
+
+- Gästebuch im Userprofil, da auch die "Grüße" dort zu sehen sind
+
+- Grüße können auch direkt über das Userprofil hinzugefügt werden
+
+
+
+
+NEUINSTALLATION:
+
+
+- Kopiere den Inhalt des Ordners "Personality_Module_V2" in das Dragonfly root Verzeichnis.
+
+- Admin Menü => Module => install
+
+- Have Fun!
+
+
+
+
+UPDATE VON VERSION 1:
+
+
+- Einfach die Dateien überschreiben, es sind KEINE ÄNDERUNGEN IN DER DATENBANK GESCHEHEN, es geht also nichts verloren
+
+- Die Änderungen in der userinfo.php sind nicht mehr notwendig und können rückgängig gemacht werden.
+  Dazu gehe einfach in /modules/Your_Account/userinfo.php und LÖSCHE folgenden Code: (ab ca. Zeile 150)
+  ACHTUNG !!! Backup machen kann nie schaden !!!
+
+if (is_active('Personality')) {
+                list($personality) = $db->sql_ufetchrow("SELECT COUNT(*) FROM ".$prefix."_personality WHERE aid='$username' AND private=0 LIMIT 1");
+                if ($personality > 0) {
+                get_lang('Personality');
+                        echo '<tr>
+                  <td colspan="2" align="center"><b><span class="gen"><a href="'.getlink('Personality&amp;mode=user&amp;nick='.$username).'">'._PTY_READ.'</a></span></b></td>
+                </tr>';
+                }
+        }
+
+
+
+
